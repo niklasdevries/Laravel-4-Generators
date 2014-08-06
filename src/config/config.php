@@ -16,6 +16,16 @@ return [
 
     'scaffold_controller_template_path' => base_path('vendor/way/generators/src/Way/Generators/templates/scaffolding/controller.txt'),
 
+	'scaffold_view_index_template_path' => base_path('vendor/way/generators/src/Way/Generators/templates/scaffolding/view_index.txt'),
+
+	'scaffold_view_show_template_path' => base_path('vendor/way/generators/src/Way/Generators/templates/scaffolding/view_show.txt'),
+
+	'scaffold_view_create_template_path' => base_path('vendor/way/generators/src/Way/Generators/templates/scaffolding/view_create.txt'),
+
+	'scaffold_view_edit_template_path' => base_path('vendor/way/generators/src/Way/Generators/templates/scaffolding/view_edit.txt'),
+
+	'scaffold_view_form_template_path' => base_path('vendor/way/generators/src/Way/Generators/templates/scaffolding/view_form.txt'),
+
     'migration_template_path' => base_path('vendor/way/generators/src/Way/Generators/templates/migration.txt'),
 
     'seed_template_path' => base_path('vendor/way/generators/src/Way/Generators/templates/seed.txt'),

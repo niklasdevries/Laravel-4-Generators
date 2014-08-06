@@ -57,4 +57,26 @@ class ScaffoldGeneratorCommand extends ResourceGeneratorCommand {
         }
     }
 
+	/**
+	 * Call view generator if user confirms
+	 *
+	 * @param $resource
+	 */
+	protected function callView($resource)
+	{
+		$collection = $this->getTableName($resource);
+		$modelName = $this->getModelName($resource);
+
+		if ($this->confirm("Do you want me to create views for this $modelName resource? [yes|no]"))
+		{
+			foreach(['index', 'show', 'create', 'edit', 'form'] as $viewName)
+			{
+				$this->call('generate:view', [
+					'viewName'          => "{$collection}.{$viewName}",
+					'--templatePath'    => Config::get("generators::config.scaffold_view_" . $viewName . "_template_path")
+				]);
+			}
+		}
+	}
+
 }
