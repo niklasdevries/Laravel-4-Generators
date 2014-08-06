@@ -66,6 +66,7 @@ class ScaffoldGeneratorCommand extends ResourceGeneratorCommand {
 	{
 		$collection = $this->getTableName($resource);
 		$modelName = $this->getModelName($resource);
+		$controllerName = $this->getControllerName($resource);
 
 		if ($this->confirm("Do you want me to create views for this $modelName resource? [yes|no]"))
 		{
@@ -73,7 +74,8 @@ class ScaffoldGeneratorCommand extends ResourceGeneratorCommand {
 			{
 				$this->call('generate:view', [
 					'viewName'          => "{$collection}.{$viewName}",
-					'--templatePath'    => Config::get("generators::config.scaffold_view_" . $viewName . "_template_path")
+					'--templatePath'    => Config::get("generators::config.scaffold_view_" . $viewName . "_template_path"),
+					'controllerName'    => $controllerName
 				]);
 			}
 		}

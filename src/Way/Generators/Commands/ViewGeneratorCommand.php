@@ -56,9 +56,21 @@ class ViewGeneratorCommand extends GeneratorCommand {
      */
     protected function getTemplateData()
     {
-        return [
-            'PATH' => $this->getFileGenerationPath()
-        ];
+	    // LessonsController
+	    $name = ucwords($this->argument('controllerName'));
+
+	    // lessons
+	    $collection = strtolower(str_replace('Controller', '', $name));
+
+	    // lesson
+	    $resource = str_singular($collection);
+
+	    // Lesson
+	    $model = ucwords($resource);
+
+	    $path = $this->getFileGenerationPath();
+
+	    return compact('name', 'collection', 'resource', 'model', 'path');
     }
 
     /**
