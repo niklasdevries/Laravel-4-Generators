@@ -5,74 +5,76 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class ControllerGeneratorCommand extends GeneratorCommand {
 
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'generate:controller';
+	/**
+	 * The console command name.
+	 *
+	 * @var string
+	 */
+	protected $name = 'generate:controller';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Generate a controller';
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = 'Generate a controller';
 
-    /**
-     * The path where the file will be created
-     *
-     * @return mixed
-     */
-    protected function getFileGenerationPath()
-    {
-        $path = $this->getPathByOptionOrConfig('path', 'controller_target_path');
+	/**
+	 * The path where the file will be created
+	 *
+	 * @return mixed
+	 */
+	protected function getFileGenerationPath()
+	{
+		$path = $this->getPathByOptionOrConfig('path', 'controller_target_path');
 
-        return $path. '/' . $this->argument('controllerName') . '.php';
-    }
+		return $path. '/' . $this->argument('controllerName') . '.php';
+	}
 
-    /**
-     * Fetch the template data
-     *
-     * @return array
-     */
-    protected function getTemplateData()
-    {
-        // LessonsController
-        $name = ucwords($this->argument('controllerName'));
+	/**
+	 * Fetch the template data
+	 *
+	 * @return array
+	 */
+	protected function getTemplateData()
+	{
+		// LessonsController
+		$name = ucwords($this->argument('controllerName'));
 
-        // lessons
-        $collection = strtolower(str_replace('Controller', '', $name));
+		// lessons
+		$collection = strtolower(str_replace('Controller', '', $name));
 
-        // lesson
-        $resource = str_singular($collection);
+		// lesson
+		$resource = str_singular($collection);
 
-        // Lesson
-        $model = ucwords($resource);
+		// Lesson
+		$model = ucwords($resource);
 
-        return compact('name', 'collection', 'resource', 'model');
-    }
+		$seedClass = ucwords($collection) . 'TableSeeder';
 
-    /**
-     * Get path to the template for the generator
-     *
-     * @return mixed
-     */
-    protected function getTemplatePath()
-    {
-        return $this->getPathByOptionOrConfig('templatePath', 'controller_template_path');
-    }
+		return compact('name', 'collection', 'resource', 'model', 'seedClass');
+	}
 
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            ['controllerName', InputArgument::REQUIRED, 'The name of the desired controller.']
-        ];
-    }
+	/**
+	 * Get path to the template for the generator
+	 *
+	 * @return mixed
+	 */
+	protected function getTemplatePath()
+	{
+		return $this->getPathByOptionOrConfig('templatePath', 'controller_template_path');
+	}
+
+	/**
+	 * Get the console command arguments.
+	 *
+	 * @return array
+	 */
+	protected function getArguments()
+	{
+		return [
+			['controllerName', InputArgument::REQUIRED, 'The name of the desired controller.']
+		];
+	}
 
 }
