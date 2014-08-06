@@ -20,6 +20,7 @@ class CreateTable extends Table {
 
         // We'll also add timestamps to new tables for convenience
         array_push($fields, ['field' => '', 'type' => 'timestamps']);
+	    array_push($fields, ['field' => '', 'type' => 'softDeletes']);
 
         return (new AddToTable($this->file, $this->compiler))->add($migrationData, $fields);
     }

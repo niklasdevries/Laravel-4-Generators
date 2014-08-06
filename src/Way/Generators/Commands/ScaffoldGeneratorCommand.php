@@ -81,4 +81,27 @@ class ScaffoldGeneratorCommand extends ResourceGeneratorCommand {
 		}
 	}
 
+
+	/**
+	 * Call migration generator if user confirms
+	 *
+	 * @param $resource
+	 */
+	protected function callMigration($resource)
+	{
+		$migrationName = $this->getMigrationName($resource);
+
+		$fields = 'name:string';
+		if($this->option('fields') !== null){
+			$fields = $this->option('fields');
+		}
+
+		if ($this->confirm("Do you want me to create a '$migrationName' migration and schema for this resource? [yes|no]"))
+		{
+			$this->call('generate:migration', [
+				'migrationName' => $migrationName,
+				'--fields' => $fields
+			]);
+		}
+	}
 }

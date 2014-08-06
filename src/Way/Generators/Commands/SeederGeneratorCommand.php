@@ -45,7 +45,8 @@ class SeederGeneratorCommand extends GeneratorCommand {
 
         return [
             'CLASS' => "{$tableName}TableSeeder",
-            'MODEL' => str_singular($tableName)
+            'MODEL' => str_singular($tableName),
+	        'TABLE' => $tableName
         ];
     }
 
